@@ -25,7 +25,11 @@ SECRET_KEY = 'd6lcfiep!j!1eb5)xj$m2u78$bb5426n+6oczv$$1emq#*^s=*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['http://127.0.0.1:8000/']
+ALLOWED_HOSTS = [
+                    'http://127.0.0.1',
+                    '127.0.0.1',
+                    'localhost'
+                ]
 
 
 # Application definition
@@ -73,10 +77,14 @@ WSGI_APPLICATION = 'djangoProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# Hid the password in Environment Variables
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'USER': 'postgres',
+        'PASSWORD': os.environ.get('postgres_pw'),
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
